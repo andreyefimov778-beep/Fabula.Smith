@@ -5,7 +5,447 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Категории — Fabula.Smith</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+  /* ═══════════════════════════════════════════
+     АРХИВ ЗНАНИЯ — встроенные стили
+     Изолированы через префикс .ark-
+  ═══════════════════════════════════════════ */
+  :root {
+    --ark-bg: #07080f;
+    --ark-bg2: #0d0f1a;
+    --ark-bg3: #111420;
+    --ark-border: rgba(180,140,80,0.2);
+    --ark-border-bright: rgba(180,140,80,0.6);
+    --ark-gold: #c9a84c;
+    --ark-gold2: #e8c96a;
+    --ark-silver: #9ab0c8;
+    --ark-text: #d4cfc4;
+    --ark-text2: #8a8478;
+  }
+
+  /* Секция-обёртка */
+  .ark-section {
+    margin: 48px 0;
+    border: 1px solid var(--ark-border-bright);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--ark-bg);
+    position: relative;
+  }
+
+  /* Декоративная верхняя полоса */
+  .ark-section::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ark-gold), var(--ark-gold2), var(--ark-gold), transparent);
+  }
+
+  /* Заголовок секции в стиле Fabula.Smith */
+  .ark-section-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--ark-border);
+    background: linear-gradient(180deg, rgba(201,168,76,0.06) 0%, transparent 100%);
+  }
+  .ark-section-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  }
+  .ark-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: 700;
+    color: var(--ark-gold2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .ark-section-desc {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px;
+    color: var(--ark-text2);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* Subtitle line */
+  .ark-subtitle-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--ark-border);
+  }
+  .ark-subtitle-line span {
+    color: var(--ark-text2);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-family: 'Cinzel', serif;
+    text-align: center;
+  }
+  .ark-subtitle-line::before,
+  .ark-subtitle-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ark-border-bright));
+  }
+  .ark-subtitle-line::after {
+    background: linear-gradient(90deg, var(--ark-border-bright), transparent);
+  }
+
+  /* Внутренний контейнер */
+  .ark-inner {
+    padding: 24px 32px 32px;
+  }
+
+  /* Легенда */
+  .ark-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: var(--ark-bg2);
+    border: 1px solid var(--ark-border);
+    border-radius: 4px;
+  }
+  .ark-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ark-text2);
+    font-family: 'Crimson Pro', serif;
+  }
+  .ark-badge {
+    font-size: 10px;
+    font-family: 'Cinzel', serif;
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .ark-b-t  { background: rgba(42,138,122,0.2); color: #4ac4b0; border: 1px solid rgba(42,138,122,0.4); }
+  .ark-b-e  { background: rgba(106,58,154,0.2); color: #b07ae0; border: 1px solid rgba(106,58,154,0.4); }
+  .ark-b-a  { background: rgba(184,120,32,0.2); color: #e8a040; border: 1px solid rgba(184,120,32,0.4); }
+  .ark-b-s  { background: rgba(58,110,168,0.2); color: #7ab0e0; border: 1px solid rgba(58,110,168,0.4); }
+
+  /* Поиск */
+  .ark-search {
+    width: 100%;
+    background: var(--ark-bg2);
+    border: 1px solid var(--ark-border);
+    color: var(--ark-text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+  .ark-search:focus { border-color: var(--ark-gold); }
+  .ark-search::placeholder { color: var(--ark-text2); }
+
+  /* Табы */
+  .ark-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .ark-tab {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 9px 14px;
+    background: var(--ark-bg2);
+    border: 1px solid var(--ark-border);
+    color: var(--ark-text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: none;
+    margin-bottom: -1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .ark-tab:hover { color: var(--ark-gold); }
+  .ark-tab.active {
+    background: var(--ark-bg3);
+    color: var(--ark-gold2);
+    border-color: var(--ark-border-bright);
+  }
+  .ark-tab-border {
+    height: 1px;
+    background: var(--ark-border-bright);
+    margin-bottom: 20px;
+  }
+  .ark-tab-content { display: none; }
+  .ark-tab-content.active { display: block; }
+
+  /* Заголовок вкладки */
+  .ark-section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ark-gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ark-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ark-section-label::before {
+    content: '';
+    width: 3px;
+    height: 14px;
+    background: var(--ark-gold);
+    display: block;
+  }
+
+  /* Сетка карточек */
+  .ark-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .ark-grid-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .ark-grid-3 { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+  /* Карточка */
+  .ark-card {
+    background: var(--ark-bg2);
+    border: 1px solid var(--ark-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    overflow: hidden;
+    position: relative;
+  }
+  .ark-card:hover {
+    border-color: var(--ark-border-bright);
+    background: var(--ark-bg3);
+    transform: translateY(-2px);
+  }
+  .ark-card.active { border-color: var(--ark-gold); }
+
+  .ark-card-header {
+    padding: 12px 14px 9px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid var(--ark-border);
+  }
+  .ark-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ark-gold2);
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+  }
+  .ark-card-sub {
+    font-size: 11px;
+    color: var(--ark-text2);
+    margin-top: 3px;
+    font-style: italic;
+    font-family: 'Crimson Pro', serif;
+  }
+  .ark-card-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
+
+  .ark-card-body { padding: 10px 14px; }
+  .ark-card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    align-items: flex-start;
+  }
+  .ark-card-label {
+    font-size: 10px;
+    color: var(--ark-text2);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    min-width: 85px;
+    padding-top: 1px;
+  }
+  .ark-card-value {
+    font-size: 12px;
+    color: var(--ark-text);
+    flex: 1;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  .ark-card-detail {
+    display: none;
+    padding: 0 14px 12px;
+    border-top: 1px solid var(--ark-border);
+    margin-top: 4px;
+    animation: arkFadeIn 0.2s ease;
+  }
+  .ark-card.active .ark-card-detail { display: block; }
+  .ark-card-detail p {
+    font-size: 12px;
+    color: var(--ark-text2);
+    line-height: 1.7;
+    margin-top: 8px;
+    font-family: 'Crimson Pro', serif;
+  }
+  .ark-card-detail p + p { margin-top: 6px; }
+  .ark-card-detail strong { color: var(--ark-text); font-weight: 400; }
+
+  @keyframes arkFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .ark-expand-hint {
+    font-size: 10px;
+    color: var(--ark-text2);
+    text-align: right;
+    padding: 5px 14px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+  }
+  .ark-card:hover .ark-expand-hint { opacity: 1; color: var(--ark-gold); }
+
+  /* Цветные левые полосы */
+  .ark-c-gold   { border-left: 3px solid var(--ark-gold); }
+  .ark-c-blue   { border-left: 3px solid #4a80b8; }
+  .ark-c-teal   { border-left: 3px solid #3aaa90; }
+  .ark-c-purple { border-left: 3px solid #8a50cc; }
+  .ark-c-red    { border-left: 3px solid #c44a3a; }
+  .ark-c-green  { border-left: 3px solid #4a9a5a; }
+  .ark-c-amber  { border-left: 3px solid #c88820; }
+  .ark-c-silver { border-left: 3px solid #7a9ab8; }
+  .ark-c-pink   { border-left: 3px solid #b85880; }
+  .ark-c-coral  { border-left: 3px solid #b86040; }
+
+  .ark-hidden { display: none !important; }
+
+  /* Принципы */
+  .ark-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .ark-principle-card {
+    background: var(--ark-bg2);
+    border: 1px solid var(--ark-border);
+    border-radius: 4px;
+    padding: 18px;
+  }
+  .ark-principle-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--ark-gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ark-principle-card p {
+    font-size: 12px;
+    color: var(--ark-text2);
+    line-height: 1.7;
+    font-family: 'Crimson Pro', serif;
+  }
+  .ark-principle-card .ark-num {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: rgba(201,168,76,0.12);
+    float: right;
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  /* Таймлайн */
+  .ark-timeline { position: relative; padding-left: 28px; }
+  .ark-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--ark-border);
+  }
+  .ark-tl-item { position: relative; margin-bottom: 18px; }
+  .ark-tl-dot {
+    position: absolute;
+    left: -24px; top: 4px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ark-gold);
+    border: 1px solid var(--ark-bg);
+  }
+  .ark-tl-date {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--ark-gold);
+    letter-spacing: 0.1em;
+  }
+  .ark-tl-text {
+    font-size: 12px;
+    color: var(--ark-text2);
+    margin-top: 3px;
+    font-family: 'Crimson Pro', serif;
+    line-height: 1.65;
+  }
+
+  /* Иерархия рас */
+  .ark-hierarchy {
+    padding: 14px 18px;
+    background: rgba(58,110,168,0.08);
+    border: 1px solid rgba(58,110,168,0.2);
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .ark-hierarchy-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--ark-gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+  .ark-hierarchy-chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    font-size: 11px;
+    color: var(--ark-text2);
+    font-family: 'Crimson Pro', serif;
+  }
+  .ark-hierarchy-chain .ark-hl { color: var(--ark-gold2); font-family: 'Cinzel', serif; font-size: 10px; }
+
+  /* Футер секции */
+  .ark-footer-note {
+    text-align: center;
+    padding: 18px 0 4px;
+    border-top: 1px solid var(--ark-border);
+    font-size: 11px;
+    color: var(--ark-text2);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .ark-inner { padding: 16px 16px 24px; }
+    .ark-section-header { padding: 20px 16px 16px; }
+    .ark-grid-2 { grid-template-columns: 1fr; }
+    .ark-tab { font-size: 9px; padding: 8px 10px; }
+  }
+  </style>
 </head>
 <body>
 
@@ -122,6 +562,523 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════════════
+         АРХИВ ЗНАНИЯ — вставлен между Паранормальным и Космосом
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ark-section" id="archive">
+
+      <div class="ark-section-header">
+        <div class="ark-section-icon">🗝️</div>
+        <div>
+          <div class="ark-section-title">АРХИВ ЗНАНИЯ</div>
+          <div class="ark-section-desc">Космологическая справочная система · Синтез традиций и источников</div>
+        </div>
+      </div>
+
+      <div class="ark-subtitle-line">
+        <span>Полное раскрытие · Оптимальная временная линия · Великое пробуждение</span>
+      </div>
+
+      <div class="ark-inner">
+
+        <!-- Легенда -->
+        <div class="ark-legend">
+          <div class="ark-legend-item"><span class="ark-badge ark-b-t">Т</span> Текстологически подтверждено</div>
+          <div class="ark-legend-item"><span class="ark-badge ark-b-e">Э</span> Эзотерическая традиция</div>
+          <div class="ark-legend-item"><span class="ark-badge ark-b-a">А</span> Альтернативные исследователи</div>
+          <div class="ark-legend-item"><span class="ark-badge ark-b-s">С</span> Синтез и интерпретация</div>
+        </div>
+
+        <!-- Поиск -->
+        <input class="ark-search" type="text" placeholder="Поиск по имени, функции, территории..." oninput="arkFilter(this.value)">
+
+        <!-- Табы -->
+        <div class="ark-tabs">
+          <div class="ark-tab active" onclick="arkTab('anunnaki',this)">Анунаки / Элохим</div>
+          <div class="ark-tab" onclick="arkTab('igigi',this)">Игиги</div>
+          <div class="ark-tab" onclick="arkTab('races',this)">Расы</div>
+          <div class="ark-tab" onclick="arkTab('structures',this)">Структуры власти</div>
+          <div class="ark-tab" onclick="arkTab('principles',this)">Принципы</div>
+          <div class="ark-tab" onclick="arkTab('events',this)">Ключевые события</div>
+        </div>
+        <div class="ark-tab-border"></div>
+
+        <!-- ── АНУНАКИ ── -->
+        <div id="ark-tab-anunnaki" class="ark-tab-content active">
+          <div class="ark-section-label">Великие Анунаки — Элохим — Боги-Управители</div>
+          <div class="ark-grid ark-grid-2">
+
+            <div class="ark-card ark-c-gold" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">АН / АНУ — Отец Богов</div><div class="ark-card-sub">Верховный небесный принцип · Число 60</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Уран · Зевс (функция)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Славянское</div><div class="ark-card-value">Сварог · Род (первопричина)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Территория</div><div class="ark-card-value">Ближний Восток · Урук · Нибиру [А]</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Рогатая тиара · Восьмиконечная звезда</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>Шумерские тексты [Т]:</strong> AN (𒀭) — само слово «небо» и «бог» одновременно. Детерминатив перед именами всех богов. Число 60 — высшее в шексагесимальной системе. Место культа — Урук.</p>
+                <p><strong>Эзотерика [Э]:</strong> Соответствует Кетер в Сефирот — первая эманация Эйн Соф. «Корона» над всем деревом. В герметической системе — Первый Отец Corpus Hermeticum.</p>
+                <p><strong>Версия [А] Ситчин:</strong> Ану — глава анунаков с Нибиру. Редко посещал Землю лично. Несколько раз разрешал конфликт между Энки и Энлилем.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-blue" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ЭНЛИЛЬ — Господин Бури</div><div class="ark-card-sub">Исполнительный правитель Земли · Число 50</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Зевс · Аполлон</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Славянское</div><div class="ark-card-value">Перун — громовержец, каратель</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Территория</div><div class="ark-card-value">Ниппур · Месопотамия · через Рим — Западная Европа</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Орёл · Молния · Бык · Топор</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> EN.LIL — «господин воздуха/бури». Число 50. Главный исполнительный бог. Место культа — Ниппур. Инициатор Потопа в «Атрахасисе».</p>
+                <p><strong>[А] Яхве:</strong> Ситчин, Телинджер и ряд других авторов идентифицируют Яхве именно с Энлилем — карающий бог, требующий послушания, насылающий потопы и казни.</p>
+                <p><strong>Двуглавый орёл [С]:</strong> Символ клана Энлиля прослеживается от шумерской иконографии → Хетты → Византия → Россия → Австрия. Сознательная преемственность символики управляющего клана.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-teal" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ЭНКИ / ЭА — Господин Земли</div><div class="ark-card-sub">Мудрость · Магия · Создатель людей · Число 40</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Посейдон · Прометей · Гермес</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Славянское</div><div class="ark-card-value">Велес / Волос — мудрость, магия</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Территория</div><div class="ark-card-value">Эриду · Египет (через Тота) · Кельтская Европа [А]</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Двойная змея · Кадуцей · Козерог · Вода</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> EN.KI — «господин земли». Число 40. Место культа — Эриду, древнейший город Шумера. Хранит МЕ в Абзу. Создаёт человека с Нинхурсаг. Спасает Утнапиштима от Потопа.</p>
+                <p><strong>Змей в Эдеме [А/Э]:</strong> По Ситчину — Энки буквально является Змеем, давшим людям запрещённое знание. Это описание конфликта двух богов через человека.</p>
+                <p><strong>Тот как аватар [А]:</strong> В египетской традиции Тот = прямое отражение Энки. Через Тота → Гермес Трисмегист → герметическая традиция → каббала.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-pink" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ИНАННА / ИШТАР</div><div class="ark-card-sub">Венера · Любовь и война · Похитительница МЕ · Число 15</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Афродита · Афина · Артемида</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Славянское</div><div class="ark-card-value">Лада · Жива · частично Марена</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Территория</div><div class="ark-card-value">Урук · Финикия (Астарта)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Восьмиконечная звезда · Лев · Крылья</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> Планета Венера — «утренняя и вечерняя звезда». Число 15. Внучка Ану. Миф «Инанна в подземном мире» — снятие 7 МЕ на 7 уровнях = 7 чакр, 7 сефирот нижнего Древа, 7 планетарных сфер.</p>
+                <p><strong>МЕ и власть [Т]:</strong> Инанна похищает МЕ у Энки — миф о переходе знания от подземной мудрости к активной власти. 94 МЕ перечислены в тексте.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-amber" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">МАРДУК / БЭЛ</div><div class="ark-card-sub">Победитель Тиамат · Царь богов Вавилона · Юпитер</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Зевс · Юпитер (планета Мардука)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Территория</div><div class="ark-card-value">Вавилон · Персия → Рим → Ватикан [А]</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Дракон Мушхуш · Лопата · Зиккурат</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> AMAR.UTU — «телёнок солнца». Сын Энки. В «Энума Элиш» убивает Тиамат, из её тела создаёт мир, захватывает Таблицу Судеб у Кингу. Вавилон при Хаммурапи делает его верховным богом.</p>
+                <p><strong>Монотеизм [А]:</strong> По Эндрю Коллинсу — Мардук стоит за доктриной «единственного бога». Он захватил функции всех богов, объявив себя единственным — шаблон для последующих монотеистических религий.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-coral" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">НИНХУРСАГ / НИНМАХ</div><div class="ark-card-sub">Великая Мать · Создатель тел Лулу · Нинти</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Гера · Деметра · Гея</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Славянское</div><div class="ark-card-value">Макошь · Мать-сыра-земля</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ</div><div class="ark-card-value">Лев · Омфалос · Пуповина · Матка</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> NIN.HUR.SAG — «госпожа священной горы». Нинти = «госпожа жизни/ребра» — в шумерском «ти» = и «ребро», и «жизнь». Отсюда легенда о ребре Адама.</p>
+                <p><strong>Создание Лулу [А]:</strong> В «Атрахасисе» именно Нинхурсаг «лепит» 14 первых людей из глины смешанной с кровью убитого бога. По Ситчину — она разработала метод генетической модификации.</p>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /anunnaki -->
+
+        <!-- ── ИГИГИ ── -->
+        <div id="ark-tab-igigi" class="ark-tab-content">
+          <div class="ark-section-label">Игиги — Небесные Стражи — Наблюдатели</div>
+          <div class="ark-grid ark-grid-2">
+
+            <div class="ark-card ark-c-silver" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ИГИГИ — Коллективный образ</div><div class="ark-card-sub">300 небесных + 300 земных · Рабочий класс богов</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Параллели</div><div class="ark-card-value">«Стражи» Книги Еноха (ir — «бодрствующий»)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Восстание</div><div class="ark-card-value">После 40 лет работы → причина создания Лулу</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Нефилимы</div><div class="ark-card-value">Потомки от браков Игигов с дочерьми Лулу</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Знания</div><div class="ark-card-value">Передали: металлургию, магию, астрологию, медицину</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т] «Атрахасис»:</strong> Игиги 40 лет копали каналы и добывали ресурсы по приказу Энлиля. Восстали — сожгли инструменты, пришли к дворцу. Результат: Энки и Нинхурсаг создали Лулу как замену. Это буквальный текст, не метафора.</p>
+                <p><strong>[Т] Книга Еноха:</strong> 200 «стражей» во главе с Шемхазаем сошли на гору Хермон. Взяли жён среди людей, породили нефилимов-исполинов. Передали запрещённые знания — «Азазел научил людей делать мечи и ножи». Это Бытие 6:1-4 в развёрнутой версии.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-purple" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">НЕФИЛИМЫ — Гибридная раса</div><div class="ark-card-sub">Игиги × Лулу · «Исполины» · Герои древности</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Источник [Т]</div><div class="ark-card-value">Бытие 6:4 · Книга Еноха · Книга Юбилеев</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Гильгамеш</div><div class="ark-card-value">2/3 «бог», 1/3 человек — нефилим по определению</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Царская кровь</div><div class="ark-card-value">По Гарднеру — линия Грааля = нефилимская линия</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> «Нефилим» — от «нафаль» (падать). «Падшие» или «те кто пали сверху». Числа 13:33 описывает их как исполинов. Книга Еноха: рост 300 локтей, пожирали людей когда кончилась обычная еда.</p>
+                <p><strong>[А] Царские линии:</strong> По Гарднеру, Телинджеру — нефилимская кровь была сознательно сохранена в царских линиях Шумера, Египта, затем израильских патриархов, меровингских королей, британской монархии.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-amber" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">АНЗУ / ЗУ</div><div class="ark-card-sub">Похититель Таблицы Судеб · Крылатый Лев</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Форма</div><div class="ark-card-value">Лев с орлиной головой, крылья</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Греческое</div><div class="ark-card-value">Грифон · Сфинкс (аспект)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Иранское</div><div class="ark-card-value">Симург (Saēna mərəγa) — прямой прообраз</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Параллель</div><div class="ark-card-value">Люцифер — похититель исходного кода реальности</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т]:</strong> Анзу охранял вход в небесный дворец. Похитил Таблицу Судеб у Энлиля — завладел «кодом управления реальностью». Побеждён Нинуртой. Цепочка: Анзу → авестийский Симург → скифо-сарматские грифоны → восточнославянский Симаргл.</p>
+                <p><strong>[Э/С] Люцифер-параллель:</strong> Анзу похитил «таблицу судеб» (исходный код реальности). Люцифер «похитил» знание и свет. Оба — хранители, ставшие похитителями. Архетип один.</p>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /igigi -->
+
+        <!-- ── РАСЫ ── -->
+        <div id="ark-tab-races" class="ark-tab-content">
+          <div class="ark-section-label">Расы — Иерархия существ — Классификация</div>
+
+          <div class="ark-hierarchy">
+            <div class="ark-hierarchy-title">ИЕРАРХИЯ УРОВНЕЙ</div>
+            <div class="ark-hierarchy-chain">
+              <span class="ark-hl">Всевышний / Эйн Соф</span>
+              <span>→</span><span>Световые существа (Плеядеяне · Арктурианцы · Синие Авиане)</span>
+              <span>→</span><span>Демиурги (Анунаки · Лирианцы · Сирианцы)</span>
+              <span>→</span><span>Тёмные расы (Драконианцы · Рептилоиды)</span>
+              <span>→</span><span>Инструменты (Серые · Игиги)</span>
+              <span>→</span><span>Земные расы (Лулу · Нефилимы · Агартанцы)</span>
+            </div>
+          </div>
+
+          <div class="ark-grid ark-grid-2">
+
+            <div class="ark-card ark-c-gold" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ПЛЕЯДЕЯНЕ — Человеки Душевные</div><div class="ark-card-sub">Световые существа · Наблюдатели · ~30% населения Земли</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Природа</div><div class="ark-card-value">Созданы Всевышним из света — не Элохимами</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Параллели [Э]</div><div class="ark-card-value">Пневматики (гностицизм) · Нешама (каббала)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Ангелы</div><div class="ark-card-value">«Человеки» = «ангелы» библейской традиции = посланники</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Э] Три типа людей:</strong> Апостол Павел (1 Кор 2:14) — соматикос (телесный = Лулу), психикос (душевный), пневматикос (духовный = воплощённый плеядеянин). Это онтологическое различие природ.</p>
+                <p><strong>30% [А]:</strong> Долорес Кэннон («Три волны добровольцев»), Барбара Марсиняк — независимо указывают на ~треть населения как «нелокальные» по происхождению сознания.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-teal" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ЛУЛУ — Биологические Роботы</div><div class="ark-card-sub">LU.LU · «Примитивный рабочий» · Homo sapiens</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Создатели</div><div class="ark-card-value">Энки + Нинхурсаг (генетическая инженерия)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Цель создания</div><div class="ark-card-value">Замена восставших Игигов на физических работах</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Аватар</div><div class="ark-card-value">Тело для воплощения световых сознаний</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т] «Атрахасис»:</strong> Lullu — аккадское «примитивный рабочий, первозданный человек». Создан смешением глины с кровью убитого бога. Цель — замена Игигов. Число первых Лулу — 14 (7 мужчин, 7 женщин).</p>
+                <p><strong>[А] Телинджер:</strong> Homo sapiens создан Энки как «раб-вид» для добычи золота в Южной Африке. Генетические следы вмешательства — 223 гена человека не имеют эволюционных предшественников.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-red" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">РЕПТИЛОИДЫ / ДРАКОНИАНЦЫ</div><div class="ark-card-sub">Альфа-Драконианцы · Нага · Доанунакская раса [А]</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Традиции [Э]</div><div class="ark-card-value">Нага (Индия) · Тиамат (Шумер)</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">База</div><div class="ark-card-value">Подземные тоннели · Антарктида [А]</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Тиамат [С]</div><div class="ark-card-value">Первичный дракон убитый Мардуком = реальный расовый конфликт</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Э] Нага:</strong> В индуистских текстах (Махабхарата, Пураны) — подземная раса змей-людей, живущих в Патале. Хранят мудрость, владеют технологиями, иногда вступают в союз с людьми.</p>
+                <p><strong>[С] Тиамат:</strong> Если убийство Тиамат Мардуком — реальный расовый конфликт, то это объясняет постоянный нарратив «победы над драконом» во всех культурах. Не метафора — запись реального события.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-blue" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">СИРИАНЦЫ</div><div class="ark-card-sub">Египетская линия · Сакральная геометрия · Исида</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-t">Т</span><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Традиция [Т]</div><div class="ark-card-value">Сириус = Сопдет · Исида · начало египетского года</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Догон [А]</div><div class="ark-card-value">Знание Сириуса B до его открытия — Роберт Темпл 1976</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">В системе [С]</div><div class="ark-card-value">Энки → Тот → Сирианская линия → египетские жрецы</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[А] Темпл:</strong> Роберт Темпл «Мистерия Сириуса» (1976). Народ Догон в Мали знал о Сириусе B (белый карлик, невидим без телескопа), периоде его орбиты (50 лет), плотности. Книга вызвала серьёзную научную дискуссию, не опровергнута полностью.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-purple" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">СИНИЕ АВИАНЕ</div><div class="ark-card-sub">Птицеподобные · Сферическое Бытие · Миротворцы [А]</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-a">А</span><span class="ark-badge ark-b-e">Э</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Описание</div><div class="ark-card-value">~2.5м · синее оперение · синие глаза · птицеподобные</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Функция</div><div class="ark-card-value">Нейтрализация межрасовых конфликтов вокруг Земли</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Египет [Э]</div><div class="ark-card-value">Тот-ибис · Гор-сокол · Ра-ястреб = контакты с авиано-расой</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[А] Гуд:</strong> Синие Авиане появились в Солнечной системе относительно недавно. Их присутствие связано с «солнечным событием» — вспышкой, меняющей сознание. Прямая связь с «Великой Солнечной Вспышкой» на карте.</p>
+                <p><strong>[Э/С]:</strong> Птичья иконография богов-учителей универсальна: Египет — Тот, Гор, Ра. Шумер — Анзу. Ацтеки — Кетцалькоатль. Возможно буквальное описание внешности существ, а не метафора.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-green" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">АГАРТАНЦЫ / ПОДЗЕМНЫЕ</div><div class="ark-card-sub">Агарта · Шамбала · Цивилизация внутренней Земли</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Традиции [Э]</div><div class="ark-card-value">Патала (Индия) · Шамбала (Тибет) · Агарти</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Рерих [А]</div><div class="ark-card-value">Экспедиции 1920х — ламы упоминали Агарту как реальное место</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">В системе [С]</div><div class="ark-card-value">Клан Энки · Велес · Абзу = подземные цивилизации</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Э] Буддийская традиция:</strong> Шамбала и Агарта описываются в тибетских текстах как физически существующие места, а не только духовные символы. Николас Рерих фиксировал эти упоминания у лам в 1920х как факт в экспедиционных дневниках.</p>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /races -->
+
+        <!-- ── СТРУКТУРЫ ВЛАСТИ ── -->
+        <div id="ark-tab-structures" class="ark-tab-content">
+          <div class="ark-section-label">Структуры власти — Кланы — Управляющие системы</div>
+          <div class="ark-grid ark-grid-2">
+
+            <div class="ark-card ark-c-purple" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">СОВЕТ САТУРНА</div><div class="ark-card-sub">Тёмное Солнце · Кольца-передатчик · Матрица реальности</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-e">Э</span><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Анунак</div><div class="ark-card-value">Нинурта / Кронос · Сатурн-планета</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Символ [Э]</div><div class="ark-card-value">Чёрное Солнце · Куб Сатурна · Чёрный квадрат Малевича</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Функция [А]</div><div class="ark-card-value">Управляющая система матрицы · ограничение сознания</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Э] Сатурн в традиции:</strong> Кронос/Сатурн — бог времени, поглощающий собственных детей = ограничение, цикличность, материальный мир. В гностицизме Сатурн = Ялдабаоф (Демиург, создатель материальной ловушки).</p>
+                <p><strong>[А] Кольца как технология:</strong> По ряду авторов — кольца Сатурна являются искусственным передатчиком, создающим «лунно-сатурнианскую матрицу» — частотную сетку, ограничивающую восприятие Лулу пятью чувствами.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-amber" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ГАЛАКТИЧЕСКАЯ ФЕДЕРАЦИЯ</div><div class="ark-card-sub">Межрасовый совет · «Закон Одного» · Эксперимент на Земле</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Гуд [А]</div><div class="ark-card-value">22 расы в Супер Федерации проводят генетический эксперимент</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Ra Material [А]</div><div class="ark-card-value">«Закон Одного» — Ра из 6й плотности · Галактическая Федерация</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Функция</div><div class="ark-card-value">Надзор за Землёй · «Большой эксперимент»</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[А] «Большой эксперимент»:</strong> По Гуду — 22 расы (включая плеядеян, сирианцев, ориониан) проводят параллельные генетические эксперименты с человечеством. Земля — «зоопарк» или «лаборатория». Каждая раса добавила свои гены в Лулу.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-red" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ТАЙНАЯ КОСМИЧЕСКАЯ ПРОГРАММА</div><div class="ark-card-sub">SSP · ICC · USAP · MJ-12 · Синдикат Ориона</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-a">А</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">MJ-12 [А]</div><div class="ark-card-value">Комиссия Маджестик-12 — засекреченная группа с 1947</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Базы</div><div class="ark-card-value">Луна · Марс · Пояс астероидов · ICC базы</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Технологии</div><div class="ark-card-value">Нулевая точка · Торсионные поля · Антигравитация</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[А] MJ-12:</strong> Документы Маджестик-12 появились в 1984 году. Подлинность спорна. Если реальны — описывают секретный комитет при президенте США для управления информацией о внеземных контактах, начиная с Розуэлла 1947.</p>
+                <p><strong>[А] Февраль 1942:</strong> «Битва за Лос-Анджелес» — реально задокументированное событие: армия США открыла зенитный огонь по неопознанным объектам над Лос-Анджелесом. Тысячи свидетелей.</p>
+              </div>
+            </div>
+
+            <div class="ark-card ark-c-coral" onclick="arkToggle(this)">
+              <div class="ark-card-header">
+                <div><div class="ark-card-name">ГЛУБИННОЕ ГОСУДАРСТВО / ИЛЛЮМИНАТЫ</div><div class="ark-card-sub">Земные структуры управления · Ватикан · Cabal</div></div>
+                <div class="ark-card-badges"><span class="ark-badge ark-b-a">А</span><span class="ark-badge ark-b-e">Э</span></div>
+              </div>
+              <div class="ark-card-body">
+                <div class="ark-card-row"><div class="ark-card-label">Связь с кланами</div><div class="ark-card-value">Наследники клана Мардука (Ватикан) и клана Энки</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Орден Дракона</div><div class="ark-card-value">1408 · Сигизмунд Люксембургский · реальная организация [Т]</div></div>
+                <div class="ark-card-row"><div class="ark-card-label">Иллюминаты</div><div class="ark-card-value">Адам Вейсхаупт основал орден 1776 — исторический факт [Т]</div></div>
+              </div>
+              <div class="ark-expand-hint">нажать для подробностей ↓</div>
+              <div class="ark-card-detail">
+                <p><strong>[Т] Что задокументировано реально:</strong> Орден Иллюминатов Вейсхаупта — основан 1 мая 1776, запрещён в Баварии 1785. Орден Дракона Сигизмунда — реальный рыцарский орден 1408 года при венгерском дворе.</p>
+                <p><strong>[А] Связь с анунаками:</strong> По Гарднеру — современные элитные организации являются хранителями линии крови Энки (Дом Дракона). По другим авторам — Ватикан наследует имперскую линию Мардука (Рим = новый Вавилон Мардука).</p>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /structures -->
+
+        <!-- ── ПРИНЦИПЫ ── -->
+        <div id="ark-tab-principles" class="ark-tab-content">
+          <div class="ark-section-label">Принципы · Законы · Системы знания</div>
+          <div class="ark-principles-grid">
+
+            <div class="ark-principle-card">
+              <span class="ark-num">МЕ</span>
+              <h3>МЕ — Таблицы Судеб</h3>
+              <p>Шумерские «программы реальности» [Т]. 94 МЕ перечислены в мифе «Инанна и Энки»: жречество, царство, ложь, правда, музыка, эмоции. Каждое МЕ — «исполняемый файл» онтологической категории. Хранились у Энки в Абзу. Похищены Инанной → переданы через Набу → Тот → Книга Тота → Таро (22 открытых) + Сефирот (22 пути) [Э/С].</p>
+            </div>
+
+            <div class="ark-principle-card">
+              <span class="ark-num">22</span>
+              <h3>Система 22 — Операторы реальности</h3>
+              <p>22 Старших аркана Таро = 22 пути Сефирот = 22 буквы иврита = 22 открытых МЕ [Э]. Каждый путь — оператор преобразования между состояниями (сефирот). Число 22 описывает минимально необходимый набор операторов для построения любой реальности [С].</p>
+            </div>
+
+            <div class="ark-principle-card">
+              <span class="ark-num">7</span>
+              <h3>Семь уровней — Инанна в подземном мире</h3>
+              <p>На 7 уровнях подземного мира с Инанны снимают 7 МЕ. Это = 7 чакр = 7 планетарных сфер = 7 нижних сефирот [Э/Т]. Нисхождение = воплощение, облачение в плотность. Восхождение = освобождение, «побег из матрицы».</p>
+            </div>
+
+            <div class="ark-principle-card">
+              <span class="ark-num">ВСВ</span>
+              <h3>Великая Солнечная Вспышка</h3>
+              <p>Центральное событие на карте [А]. Происходит каждые ~25 900 лет (прецессия равноденствий). По источникам (Кори Гуд, Пол ЛаВиолет «Земля под огнём», Дэвид Уилкок) — солнечная «микронова» или плазменный выброс, перезапускающий цивилизации. Активирует духовное тело Лулу, «обновление ДНК».</p>
+            </div>
+
+            <div class="ark-principle-card">
+              <span class="ark-num">ЗО</span>
+              <h3>Закон Одного — Ra Material</h3>
+              <p>Канализировано 1981-84 [А]. Ра — «социальный комплекс памяти» 6й плотности. Основной принцип: «Всё едино». Семь плотностей = уровней эволюции сознания. Земля переходит из 3й в 4ю плотность. Поляризация: «служение другим» vs «служение себе».</p>
+            </div>
+
+            <div class="ark-principle-card">
+              <span class="ark-num">АК</span>
+              <h3>Хроники Акаши</h3>
+              <p>Универсальная информационная база всех событий, мыслей, намерений [Э]. Санскрит: Akasha = «эфир», пятый элемент. В каббале = Айн Соф Ор (бесконечный свет) как информационный субстрат. В квантовой механике аналог — «квантовое поле» или «нулевая точка» [С].</p>
+            </div>
+
+          </div>
+        </div><!-- /principles -->
+
+        <!-- ── КЛЮЧЕВЫЕ СОБЫТИЯ ── -->
+        <div id="ark-tab-events" class="ark-tab-content">
+          <div class="ark-section-label">Ключевые события — Временная линия</div>
+          <div class="ark-timeline">
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#8a50cc"></div>
+              <div class="ark-tl-date">500 000+ лет назад &nbsp;<span class="ark-badge ark-b-a">А · Гуд</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">Раса Древних Строителей.</strong> Мегалитические структуры по всей солнечной системе — Луна, Марс, астероиды. Раса исчезает или трансформируется. Земля остаётся незаселённым потенциальным полем для следующих рас.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#c9a84c"></div>
+              <div class="ark-tl-date">~450 000 лет до н.э. &nbsp;<span class="ark-badge ark-b-a">А · Ситчин</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">Первое прибытие анунаков.</strong> Энки высаживается в Персидском заливе. Основывает Эриду — первый город. Цель: добыча золота для восстановления атмосферы Нибиру. Начало системного конфликта Энки и Энлиля.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#c88820"></div>
+              <div class="ark-tl-date">~50 000 лет до н.э. &nbsp;<span class="ark-badge ark-b-a">А · Кейси</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">АТЛАНТИДА — Великий Раскол.</strong> Общество раскалывается: «Сыновья Закона Одного» (духовная партия, линия Энки) против «Сыновей Велиала» (технократы, материалисты). Первый катаклизм — Атлантида дробится на архипелаг. Первая волна беженцев уходит в Европу и Северную Африку.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#c44a3a"></div>
+              <div class="ark-tl-date">~9 600 лет до н.э. &nbsp;<span class="ark-badge ark-b-t">Т · Платон</span> <span class="ark-badge ark-b-a">А · Хэнкок</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">ГИБЕЛЬ АТЛАНТИДЫ — ВЕЛИКИЙ ПОТОП.</strong> Многопричинная катастрофа: критическая перегрузка Туаои-кристалла, возможный удар астероида в Атлантику, сдвиг земной коры. «За один день и одну ночь» [Т · Платон]. Потоп зафиксирован независимо у более 200 народов: Утнапиштим, Ной, Ману, Девкалион — все описывают одно событие.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#3aaa90"></div>
+              <div class="ark-tl-date">~4 000 лет до н.э. &nbsp;<span class="ark-badge ark-b-t">Т</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">Шумерская цивилизация — внезапный расцвет.</strong> Письменность, астрономия, математика, право, города появляются без видимого эволюционного пути. «Список царей» фиксирует правление от «до потопа» до исторически верифицируемых правителей.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#c88820"></div>
+              <div class="ark-tl-date">1942 — 1947 &nbsp;<span class="ark-badge ark-b-t">Т</span> <span class="ark-badge ark-b-a">А</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">Современная точка перелома.</strong> 1942 — Битва за Лос-Анджелес: документально зафиксировано — армия США открыла зенитный огонь по неустановленным объектам, тысячи свидетелей. 1947 — Розуэлл [А]. Начало тайной космической программы.</div>
+            </div>
+
+            <div class="ark-tl-item">
+              <div class="ark-tl-dot" style="background:#3aaa90"></div>
+              <div class="ark-tl-date">2012 — настоящее время &nbsp;<span class="ark-badge ark-b-a">А</span></div>
+              <div class="ark-tl-text"><strong style="color:var(--ark-gold2)">Великое Пробуждение — оптимальная временная линия.</strong> Великая Солнечная Вспышка (2019-2024) — цикл ~25 900 лет. Обновление ДНК Лулу — активация заблокированных цепочек. Переход в 4D/5D. «Полное раскрытие» как конечная точка оптимальной линии.</div>
+            </div>
+
+          </div>
+        </div><!-- /events -->
+
+        <div class="ark-footer-note">Архив Знания · Все данные маркированы по уровню достоверности · Нажмите карточку для раскрытия</div>
+
+      </div><!-- /ark-inner -->
+    </section>
+    <!-- ═══════════════════════════════════════════════════════
+         КОНЕЦ АРХИВА ЗНАНИЯ
+    ═══════════════════════════════════════════════════════ -->
+
     <!-- Космос -->
     <section class="cat-section" id="space">
       <div class="cat-section-header">
@@ -231,5 +1188,55 @@
   </footer>
 
   <script src="main.js"></script>
+  <script>
+  // ── Архив Знания — изолированные скрипты (префикс ark) ──
+
+  function arkToggle(card) {
+    const wasActive = card.classList.contains('active');
+    const tab = card.closest('.ark-tab-content');
+    tab.querySelectorAll('.ark-card.active').forEach(c => c.classList.remove('active'));
+    if (!wasActive) card.classList.add('active');
+  }
+
+  function arkTab(name, el) {
+    const section = el.closest('.ark-section');
+    section.querySelectorAll('.ark-tab').forEach(t => t.classList.remove('active'));
+    section.querySelectorAll('.ark-tab-content').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    section.querySelector('#ark-tab-' + name).classList.add('active');
+  }
+
+  function arkFilter(query) {
+    const q = query.toLowerCase().trim();
+    const section = document.querySelector('.ark-section');
+
+    if (!q) {
+      // Вернуть нормальный вид
+      section.querySelectorAll('.ark-card').forEach(c => c.classList.remove('ark-hidden'));
+      section.querySelectorAll('.ark-tab-content').forEach(t => {
+        t.style.display = '';
+      });
+      // Восстановить активный таб
+      const activeTab = section.querySelector('.ark-tab.active');
+      if (activeTab) {
+        const name = activeTab.getAttribute('onclick').match(/'([^']+)'/)[1];
+        section.querySelectorAll('.ark-tab-content').forEach(t => t.classList.remove('active'));
+        section.querySelector('#ark-tab-' + name).classList.add('active');
+      }
+      return;
+    }
+
+    // При поиске — показать все вкладки
+    section.querySelectorAll('.ark-tab-content').forEach(t => {
+      t.style.display = 'block';
+      t.classList.add('active');
+    });
+
+    section.querySelectorAll('.ark-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.classList.toggle('ark-hidden', !text.includes(q));
+    });
+  }
+  </script>
 </body>
 </html>
