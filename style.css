@@ -3,306 +3,228 @@
   ║   FABULA.SMITH — СВЕТЛАЯ ТЕМА                   ║
   ║   Подключить ПОСЛЕ style.css на каждой странице:║
   ║   <link rel="stylesheet" href="light-theme.css">║
+  ║   Только цвета. Никаких изменений стиля.        ║
   ╚══════════════════════════════════════════════════╝
 */
 
-/* ── 1. CSS-переменные: светлая палитра ── */
+/* ── Переменные ── */
 :root {
   --bg:        #f2ede4;
   --bg2:       #e8e2d8;
   --panel:     #ffffff;
-  --border:    #c8b99a;
+  --border:    #c0a87a;
   --accent:    #1a6fa8;
   --accent2:   #c84a10;
   --glow:      #1a6fa820;
   --text:      #1a1a1a;
-  --text-dim:  #5a5a5a;
+  --text-dim:  #555555;
 }
 
-/* ── 2. Фон body, убираем звёзды ── */
+/* ── Фон, убираем звёзды ── */
 body {
-  background: var(--bg) !important;
-  color: var(--text) !important;
+  background: var(--bg);
+  color: var(--text);
 }
 
-#starfield {
-  display: none !important;
-}
+#starfield { display: none; }
 
-/* ── 3. Шапка ── */
+/* ── Шапка ── */
 .site-header {
-  background: rgba(242, 237, 228, 0.96) !important;
-  border-bottom-color: var(--border) !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08) !important;
+  background: rgba(242, 237, 228, 0.95);
+  border-bottom-color: var(--border);
 }
 
-.logo-fab   { color: var(--accent) !important; }
-.logo-dot   { color: var(--accent2) !important; }
-.logo-smith { color: #1a1a1a !important; }
+.logo-fab   { color: var(--accent); }
+.logo-dot   { color: var(--accent2); }
+.logo-smith { color: var(--text); }
 
-.nav-link {
-  color: #5a5a5a !important;
-  text-shadow: none !important;
-}
+.nav-link { color: var(--text-dim); }
 .nav-link:hover,
 .nav-link.active {
-  color: var(--accent) !important;
-  border-color: var(--border) !important;
-  background: rgba(26,111,168,0.06) !important;
-  text-shadow: none !important;
+  color: var(--accent);
+  border-color: var(--border);
+  background: rgba(26,111,168,0.07);
+  text-shadow: 0 0 8px rgba(26,111,168,0.4);
 }
 
 .header-badge {
-  color: var(--accent2) !important;
-  border-color: var(--accent2) !important;
-  background: rgba(200,74,16,0.06) !important;
+  color: var(--accent2);
+  border-color: var(--accent2);
 }
 
-/* ── 4. Герой (index.html) ── */
-.hero::before {
-  background: radial-gradient(circle, rgba(26,111,168,0.05) 0%, transparent 70%) !important;
-}
-
+/* ── Герой ── */
 .hero-title {
-  color: var(--accent) !important;
-  text-shadow: none !important;
-  animation: none !important;
+  color: var(--accent);
+  text-shadow:
+    0 0 20px rgba(26,111,168,0.4),
+    0 0 60px rgba(26,111,168,0.15);
 }
 
-.hero-title::before,
-.hero-title::after {
-  display: none !important;
-}
+.hero-title::before { color: #cc0030; }
+.hero-title::after  { color: #00cc7a; }
 
-.hero-sub { color: #5a5a5a !important; }
-
-.accent { color: var(--accent) !important; }
+.hero-sub { color: var(--text-dim); }
 
 .hero-disclaimer-pill {
-  color: var(--accent2) !important;
-  border-color: var(--accent2) !important;
-  background: rgba(200,74,16,0.06) !important;
-  box-shadow: none !important;
+  color: var(--accent2);
+  border-color: var(--accent2);
+  background: rgba(200,74,16,0.06);
+  box-shadow: 0 0 20px rgba(200,74,16,0.10);
 }
 
-/* ── 5. Полоса категорий ── */
+/* ── Полоса категорий ── */
 .categories-strip {
-  background: var(--bg2) !important;
-  border-top-color: var(--border) !important;
-  border-bottom-color: var(--border) !important;
+  background: var(--bg2);
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
 }
 
-.section-label { color: #999 !important; }
+.section-label { color: var(--text-dim); }
 
 .cat-card {
-  background: #ffffff !important;
-  border-color: var(--border) !important;
-  color: #1a1a1a !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  background: var(--panel);
+  border-color: var(--border);
+  color: var(--text);
 }
 .cat-card:hover {
-  border-color: var(--accent) !important;
-  box-shadow: 0 8px 24px rgba(26,111,168,0.12) !important;
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(26,111,168,0.10);
 }
-.cat-name { color: #1a1a1a !important; }
+.cat-name { color: var(--text); }
 
-/* Цветные полоски сверху — насыщеннее для светлого фона */
-.cat-conspiracy::before { background: #c84a10 !important; }
-.cat-history::before    { background: #b07800 !important; }
-.cat-paranormal::before { background: #6d28d9 !important; }
-.cat-space::before      { background: #1a6fa8 !important; }
-.cat-tech::before       { background: #15803d !important; }
-.cat-nature::before     { background: #166534 !important; }
-
-/* ── 6. Карточки теорий ── */
+/* ── Карточки теорий ── */
 .theory-card {
-  background: #ffffff !important;
-  border-color: var(--border) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
-}
-.theory-card::after {
-  background: linear-gradient(90deg, transparent, var(--accent), transparent) !important;
+  background: var(--panel);
+  border-color: var(--border);
 }
 .theory-card:hover {
-  border-color: rgba(26,111,168,0.4) !important;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.10) !important;
+  border-color: rgba(26,111,168,0.35);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+}
+.theory-card::after {
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
-.theory-title   { color: #111 !important; }
-.theory-excerpt { color: #5a5a5a !important; }
-.theory-footer  { border-top-color: var(--border) !important; }
-.theory-date    { color: #999 !important; }
+.theory-title   { color: #111111; }
+.theory-excerpt { color: var(--text-dim); }
+.theory-footer  { border-top-color: var(--border); }
+.theory-date    { color: var(--text-dim); }
 
-/* Теги — цветные, но читаемые на белом */
-.tag-space      { background: rgba(26,111,168,0.10)  !important; color: #0d4f80  !important; border-color: rgba(26,111,168,0.35)  !important; }
-.tag-history    { background: rgba(176,120,0,0.10)   !important; color: #704a00  !important; border-color: rgba(176,120,0,0.35)   !important; }
-.tag-tech       { background: rgba(21,128,61,0.10)   !important; color: #0a4e22  !important; border-color: rgba(21,128,61,0.35)   !important; }
-.tag-paranormal { background: rgba(109,40,217,0.10)  !important; color: #4a1890  !important; border-color: rgba(109,40,217,0.35)  !important; }
-.tag-conspiracy { background: rgba(200,74,16,0.10)   !important; color: #7a2800  !important; border-color: rgba(200,74,16,0.35)   !important; }
-.tag-nature     { background: rgba(22,101,52,0.10)   !important; color: #0a3d1e  !important; border-color: rgba(22,101,52,0.35)   !important; }
+/* Теги — читаемые на белом, цвета сохранены */
+.tag-space      { background: rgba(26,111,168,0.12);  color: #0d4f80;  border-color: rgba(26,111,168,0.4); }
+.tag-history    { background: rgba(176,120,0,0.12);   color: #6a4800;  border-color: rgba(176,120,0,0.4); }
+.tag-tech       { background: rgba(21,128,61,0.12);   color: #0a4e22;  border-color: rgba(21,128,61,0.4); }
+.tag-paranormal { background: rgba(109,40,217,0.12);  color: #4a1890;  border-color: rgba(109,40,217,0.4); }
+.tag-conspiracy { background: rgba(200,74,16,0.12);   color: #7a2800;  border-color: rgba(200,74,16,0.4); }
+.tag-nature     { background: rgba(22,101,52,0.12);   color: #0a3d1e;  border-color: rgba(22,101,52,0.4); }
 
-/* Штамп ВЫМЫСЕЛ */
 .fiction-stamp {
-  color: var(--accent2) !important;
-  border-color: var(--accent2) !important;
-  background: rgba(200,74,16,0.06) !important;
-  opacity: 1 !important;
+  color: var(--accent2);
+  border-color: var(--accent2);
 }
 
-/* ── 7. Футер ── */
+/* ── Футер ── */
 .site-footer {
-  background: var(--bg2) !important;
-  border-top-color: var(--border) !important;
+  background: var(--bg2);
+  border-top-color: var(--border);
 }
-.footer-logo        { color: #999 !important; }
-.footer-links a     { color: #999 !important; }
-.footer-links a:hover { color: var(--accent) !important; }
-.footer-note        { color: #999 !important; }
+.footer-logo        { color: var(--text-dim); }
+.footer-links a     { color: var(--text-dim); }
+.footer-links a:hover { color: var(--accent); }
+.footer-note        { color: var(--text-dim); }
 
-/* ── 8. Страница категорий ── */
-.categories-page h1  { color: var(--accent) !important; }
-.categories-page .d-sub { color: #999 !important; }
+/* ── Страница категорий ── */
+.categories-page h1 { color: var(--accent); }
+.categories-page .d-sub { color: var(--text-dim); }
+.cat-section-header { border-bottom-color: var(--border); }
+.cat-section-title  { color: var(--text); }
+.cat-section-desc   { color: var(--text-dim); }
 
-.cat-section-header  { border-bottom-color: var(--border) !important; }
-.cat-section-title   { color: #1a1a1a !important; }
-.cat-section-desc    { color: #666 !important; }
-
-/* ── 9. Страница дисклеймера ── */
-.disclaimer-page h1   { color: var(--accent2) !important; }
-.disclaimer-page .d-sub { color: #999 !important; }
+/* ── Дисклеймер ── */
+.disclaimer-page h1   { color: var(--accent2); }
+.disclaimer-page .d-sub { color: var(--text-dim); }
 
 .d-block {
-  background: #ffffff !important;
-  border-color: var(--border) !important;
-  border-left-color: var(--accent2) !important;
+  background: var(--panel);
+  border-color: var(--border);
+  border-left-color: var(--accent2);
 }
-.d-block h2     { color: var(--accent) !important; }
-.d-block p      { color: #5a5a5a !important; }
-.d-block strong { color: #1a1a1a !important; }
-.d-block a      { color: var(--accent) !important; }
+.d-block h2     { color: var(--accent); }
+.d-block p      { color: var(--text-dim); }
+.d-block strong { color: var(--text); }
+.d-block a      { color: var(--accent); }
 
 .d-stamp {
-  background: rgba(200,74,16,0.06) !important;
-  border-color: rgba(200,74,16,0.25) !important;
+  background: rgba(200,74,16,0.06);
+  border-color: rgba(200,74,16,0.25);
 }
-.d-stamp-text { color: var(--accent2) !important; }
+.d-stamp-text { color: var(--accent2); }
 
-/* ── 10. Архив Знания (ark-секция) ── */
-.ark-section {
-  background: #ffffff !important;
-  border-color: #c8b99a !important;
-}
-.ark-section::before {
-  background: linear-gradient(90deg, transparent, #c9a84c, #e8c050, #c9a84c, transparent) !important;
-}
+/* ── Архив Знания (ark-секция) ── */
+.ark-section        { background: #ffffff; border-color: #c0a87a; }
+.ark-section-header { background: linear-gradient(180deg, rgba(201,168,76,0.08) 0%, transparent 100%); border-bottom-color: #d4c9a8; }
+.ark-section-title  { color: #3a2000; }
+.ark-section-desc   { color: #666; }
+.ark-subtitle-line span { color: #999; }
 
-.ark-section-header {
-  background: linear-gradient(180deg, rgba(201,168,76,0.08) 0%, transparent 100%) !important;
-  border-bottom-color: #d4c9a8 !important;
-}
-.ark-section-title { color: #3a2000 !important; }
-.ark-section-desc  { color: #666 !important; }
-.ark-subtitle-line span { color: #999 !important; }
+.ark-legend         { background: #faf8f2; border-color: #d4c9a8; }
+.ark-legend-item    { color: #666; }
 
-.ark-legend {
-  background: #faf8f2 !important;
-  border-color: #d4c9a8 !important;
-}
-.ark-legend-item { color: #666 !important; }
+.ark-search         { background: #faf8f2; border-color: #d4c9a8; color: #1a1a1a; }
+.ark-search:focus   { border-color: #c9a84c; }
+.ark-search::placeholder { color: #bbb; }
 
-.ark-search {
-  background: #faf8f2 !important;
-  border-color: #d4c9a8 !important;
-  color: #1a1a1a !important;
-}
-.ark-search:focus { border-color: #c9a84c !important; }
-.ark-search::placeholder { color: #bbb !important; }
+.ark-tab            { background: #ede8dc; border-color: #d4c9a8; color: #777; }
+.ark-tab:hover      { color: #a07010; }
+.ark-tab.active     { background: #ffffff; color: #3a2000; border-color: #c9a84c; }
+.ark-tab-border     { background: rgba(160,120,40,0.35); }
 
-.ark-tab {
-  background: #ede8dc !important;
-  border-color: #d4c9a8 !important;
-  color: #777 !important;
-}
-.ark-tab:hover  { color: #a07010 !important; }
-.ark-tab.active {
-  background: #ffffff !important;
-  color: #3a2000 !important;
-  border-color: #c9a84c !important;
-}
-.ark-tab-border { background: rgba(160,120,40,0.35) !important; }
+.ark-section-label  { color: #a07010; border-bottom-color: #d4c9a8; }
+.ark-section-label::before { background: #a07010; }
 
-.ark-section-label {
-  color: #a07010 !important;
-  border-bottom-color: #d4c9a8 !important;
-}
-.ark-section-label::before { background: #a07010 !important; }
+.ark-card           { background: #fdfaf4; border-color: #d4c9a8; }
+.ark-card:hover     { background: #ffffff; border-color: #c9a84c; }
+.ark-card.active    { border-color: #c9a84c; }
+.ark-card-header    { border-bottom-color: #ede6d0; }
+.ark-card-name      { color: #2a1500; }
+.ark-card-sub       { color: #888; }
+.ark-card-label     { color: #aaa; }
+.ark-card-value     { color: #222; }
+.ark-card-detail    { border-top-color: #ede6d0; }
+.ark-card-detail p  { color: #666; }
+.ark-card-detail strong { color: #1a1a1a; }
+.ark-expand-hint    { color: #bbb; }
+.ark-card:hover .ark-expand-hint { color: #a07010; }
 
-.ark-card {
-  background: #fdfaf4 !important;
-  border-color: #d4c9a8 !important;
-}
-.ark-card:hover {
-  background: #ffffff !important;
-  border-color: #c9a84c !important;
-}
-.ark-card.active { border-color: #c9a84c !important; }
+.ark-b-t { background: rgba(42,138,122,0.12); color: #0a5045; border-color: rgba(42,138,122,0.4); }
+.ark-b-e { background: rgba(106,58,154,0.10); color: #451878; border-color: rgba(106,58,154,0.35); }
+.ark-b-a { background: rgba(184,120,32,0.10); color: #623400; border-color: rgba(184,120,32,0.35); }
+.ark-b-s { background: rgba(58,110,168,0.10); color: #1a3a70; border-color: rgba(58,110,168,0.35); }
 
-.ark-card-header { border-bottom-color: #ede6d0 !important; }
-.ark-card-name   { color: #2a1500 !important; }
-.ark-card-sub    { color: #888 !important; }
-.ark-card-label  { color: #aaa !important; }
-.ark-card-value  { color: #222 !important; }
+.ark-c-gold   { border-left-color: #c9a84c; }
+.ark-c-blue   { border-left-color: #2a62b0; }
+.ark-c-teal   { border-left-color: #0e8060; }
+.ark-c-purple { border-left-color: #6320b8; }
+.ark-c-red    { border-left-color: #b02010; }
+.ark-c-green  { border-left-color: #186a28; }
+.ark-c-amber  { border-left-color: #a86000; }
+.ark-c-silver { border-left-color: #507090; }
+.ark-c-pink   { border-left-color: #982060; }
+.ark-c-coral  { border-left-color: #983010; }
 
-.ark-card-detail { border-top-color: #ede6d0 !important; }
-.ark-card-detail p      { color: #666 !important; }
-.ark-card-detail strong { color: #1a1a1a !important; }
+.ark-principle-card         { background: #fdfaf4; border-color: #d4c9a8; }
+.ark-principle-card h3      { color: #a07010; }
+.ark-principle-card p       { color: #666; }
+.ark-principle-card .ark-num { color: rgba(160,112,16,0.10); }
 
-.ark-expand-hint { color: #bbb !important; }
-.ark-card:hover .ark-expand-hint { color: #a07010 !important; }
+.ark-timeline::before { background: #d4c9a8; }
+.ark-tl-dot           { background: #c9a84c; border-color: #f2ede4; }
+.ark-tl-date          { color: #a07010; }
+.ark-tl-text          { color: #666; }
 
-/* Бейджи Т/Э/А/С */
-.ark-b-t { background: rgba(42,138,122,0.12) !important; color: #0a5045 !important; border-color: rgba(42,138,122,0.4) !important; }
-.ark-b-e { background: rgba(106,58,154,0.10) !important; color: #451878 !important; border-color: rgba(106,58,154,0.35) !important; }
-.ark-b-a { background: rgba(184,120,32,0.10) !important; color: #623400 !important; border-color: rgba(184,120,32,0.35) !important; }
-.ark-b-s { background: rgba(58,110,168,0.10) !important; color: #1a3a70 !important; border-color: rgba(58,110,168,0.35) !important; }
+.ark-hierarchy        { background: rgba(26,111,168,0.05); border-color: rgba(26,111,168,0.18); }
+.ark-hierarchy-title  { color: #a07010; }
+.ark-hierarchy-chain  { color: #666; }
+.ark-hierarchy-chain .ark-hl { color: #2a1500; }
 
-/* Левые цветные полосы карточек — сохраняем насыщенными */
-.ark-c-gold   { border-left: 3px solid #c9a84c !important; }
-.ark-c-blue   { border-left: 3px solid #2a62b0 !important; }
-.ark-c-teal   { border-left: 3px solid #0e8060 !important; }
-.ark-c-purple { border-left: 3px solid #6320b8 !important; }
-.ark-c-red    { border-left: 3px solid #b02010 !important; }
-.ark-c-green  { border-left: 3px solid #186a28 !important; }
-.ark-c-amber  { border-left: 3px solid #a86000 !important; }
-.ark-c-silver { border-left: 3px solid #507090 !important; }
-.ark-c-pink   { border-left: 3px solid #982060 !important; }
-.ark-c-coral  { border-left: 3px solid #983010 !important; }
-
-/* Принципы */
-.ark-principle-card {
-  background: #fdfaf4 !important;
-  border-color: #d4c9a8 !important;
-}
-.ark-principle-card h3  { color: #a07010 !important; }
-.ark-principle-card p   { color: #666 !important; }
-.ark-principle-card .ark-num { color: rgba(160,112,16,0.10) !important; }
-
-/* Таймлайн */
-.ark-timeline::before { background: #d4c9a8 !important; }
-.ark-tl-dot  { background: #c9a84c !important; border-color: #f2ede4 !important; }
-.ark-tl-date { color: #a07010 !important; }
-.ark-tl-text { color: #666 !important; }
-
-/* Иерархия рас */
-.ark-hierarchy {
-  background: rgba(26,111,168,0.05) !important;
-  border-color: rgba(26,111,168,0.18) !important;
-}
-.ark-hierarchy-title { color: #a07010 !important; }
-.ark-hierarchy-chain { color: #666 !important; }
-.ark-hierarchy-chain .ark-hl { color: #2a1500 !important; }
-
-.ark-footer-note {
-  color: #bbb !important;
-  border-top-color: #d4c9a8 !important;
-}
+.ark-footer-note      { color: #bbb; border-top-color: #d4c9a8; }
